@@ -13,8 +13,6 @@ export type Travel = {
   location: string;
   coverImage: string;
   tags: Tag[];
-  createdAt: Date;
-  updatedAt: Date;
 };
 
 export type TravelLog = {

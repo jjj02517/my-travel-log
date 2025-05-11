@@ -20,7 +20,7 @@ export default function TravelListPage() {
     staleTime: 1000 * 60 * 5, // 5분 캐시 유지
   });
 
-  const handlePrefetch = (id: string): Promise<TravelDetail> => {
+  const handlePrefetch = (id: string): Promise<void> => {
     return queryClient.prefetchQuery({
       queryKey: ["travel", id],
       queryFn: () => fetchTravelDetail(id),

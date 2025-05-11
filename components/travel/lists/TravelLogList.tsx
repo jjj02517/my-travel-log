@@ -30,7 +30,7 @@ export default function TravelLogList({
     setIsLogModalOpen(true);
   };
 
-  const handleCreateLog = (newLog) => {
+  const handleCreateLog = (newLog: any) => {
     if (editingLog) {
       // 수정 모드
       setLogList((prev) =>

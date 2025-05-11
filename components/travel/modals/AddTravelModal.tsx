@@ -133,8 +133,6 @@ export default function AddTravelModal({
       id: initialData?.id || Math.random().toString(36).slice(2),
       ...formData,
       tags: initialData?.tags || [],
-      createdAt: initialData?.createdAt || new Date(),
-      updatedAt: new Date(),
     });
     handleClose();
   };

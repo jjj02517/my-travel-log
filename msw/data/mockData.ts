@@ -20,8 +20,6 @@ export const mockTravels: Travel[] = [
     endDate: new Date("2024-03-15"),
     location: "도쿄",
     coverImage: "/images/tokyo-cover.jpg",
-    createdAt: new Date("2024-03-10T00:00:00Z"),
-    updatedAt: new Date("2024-03-10T00:00:00Z"),
     tags: [
       mockTags[1], // 맛집
       mockTags[3], // 쇼핑
@@ -36,8 +34,6 @@ export const mockTravels: Travel[] = [
     endDate: new Date("2024-05-05"),
     location: "제주도",
     coverImage: "/images/jeju-cover.jpg",
-    createdAt: new Date("2024-05-01T00:00:00Z"),
-    updatedAt: new Date("2024-05-01T00:00:00Z"),
     tags: [
       mockTags[0], // 힐링
       mockTags[1], // 맛집
@@ -52,8 +48,6 @@ export const mockTravels: Travel[] = [
     endDate: new Date("2024-07-24"),
     location: "오사카",
     coverImage: "",
-    createdAt: new Date("2024-07-20T00:00:00Z"),
-    updatedAt: new Date("2024-07-20T00:00:00Z"),
     tags: [
       mockTags[1], // 맛집
       mockTags[2], // 자연
@@ -73,8 +67,6 @@ export function addMockTravel(travel: Omit<Travel, "id">) {
   const newTravel: Travel = {
     ...travel,
     id: newId,
-    createdAt: new Date(),
-    updatedAt: new Date(),
   };
 
   mockTravels.push(newTravel);
