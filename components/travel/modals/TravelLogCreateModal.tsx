@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import type { TravelLog } from "@/types/travel";
 import { TrashIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 type Props = {
   open: boolean;
@@ -199,9 +200,11 @@ export default function TravelLogCreateModal({
                 <div className="mt-2 grid grid-cols-3 gap-2">
                   {images.map((image, index) => (
                     <div key={index} className="relative group">
-                      <img
+                      <Image
                         src={image}
                         alt={`여행 사진 ${index + 1}`}
+                        width={100}
+                        height={100}
                         className="w-full h-24 object-cover rounded"
                       />
                       <button

@@ -1,6 +1,7 @@
 import { PencilIcon, TrashIcon } from "@heroicons/react/20/solid";
 import type { TravelLog } from "@/types/travel";
 import { useState } from "react";
+import Image from "next/image";
 
 type Props = {
   log: TravelLog;
@@ -25,13 +26,20 @@ export default function TravelLogCard({ log, onEdit, onDelete }: Props) {
     <div className="border p-4 rounded-md bg-white w-full">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4 text-sm text-gray-500">
-          <h4 className="">{formatDate(log.date)}</h4>
+          <h4 className="">{formatDate(log.date as string)}</h4>
           {log.location && <span className="text-sm">📍 {log.location}</span>}
         </div>
 
         <div className="flex">
           <button
-            onClick={() => onEdit(log)}
+            onClick={() =>
+              onEdit({
+                ...log,
+                date: (log.date as Date).toISOString
+                  ? (log.date as Date).toISOString()
+                  : (log.date as string),
+              })
+            }
             className="p-1 rounded hover:bg-gray-100"
             title="수정"
           >
@@ -59,11 +67,13 @@ export default function TravelLogCard({ log, onEdit, onDelete }: Props) {
       {log.images && !imgError && (
         <div className="mt-4 grid grid-cols-3 gap-2">
           {log.images.map((image, index) => (
-            <img
+            <Image
               key={index}
               src={image}
               alt={`여행 사진 ${index + 1}`}
               className="w-full h-32 object-cover rounded"
+              width={128}
+              height={128}
               onError={() => setImgError(true)}
             />
           ))}

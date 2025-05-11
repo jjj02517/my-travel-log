@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Travel } from "@/types/travel";
 import { mockTags } from "@/msw/data/mockData";
 import type { TravelListItem } from "@/types/travel";
+import Image from "next/image";
 
 type Props = TravelListItem;
 
@@ -26,10 +27,12 @@ export default function TravelCoverCard({
   return (
     <div className="rounded-lg overflow-hidden shadow hover:shadow-md transition bg-white">
       {coverImage && !imgError ? (
-        <img
+        <Image
           src={coverImage}
           alt={title}
           className="w-full h-52 object-cover"
+          width={208}
+          height={117}
           onError={() => setImgError(true)}
         />
       ) : (

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import type { Travel } from "@/types/travel";
+import Image from "next/image";
 
 type Props = {
   open: boolean;
@@ -234,10 +235,12 @@ export default function AddTravelModal({
                 className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer"
               />
               {formData.coverImage && (
-                <img
+                <Image
                   src={formData.coverImage}
                   alt="커버 미리보기"
                   className="mt-2 rounded w-full h-40 object-cover"
+                  width={400}
+                  height={160}
                 />
               )}
             </div>
