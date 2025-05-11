@@ -85,7 +85,7 @@ export const mockTravelLogs: TravelLog[] = [
   {
     id: "1",
     travelId: "1",
-    date: new Date("2024-03-10"),
+    date: "2024-03-10",
     content: "도쿄 도착! 기다리던 도쿄 여행 시작~ 설레는 마음이 한가득.",
     images: ["/images/tokyo-station.jpg"],
     location: "도쿄역",
@@ -95,7 +95,7 @@ export const mockTravelLogs: TravelLog[] = [
   {
     id: "2",
     travelId: "1",
-    date: new Date("2024-03-15"),
+    date: "2024-03-15",
     content:
       "도쿄여행에서는 신나는 디즈니 랜드 첫 방문! 디즈니 캐릭터들과 함께 즐거운 시간을 보냈다. 너무 즐겁쟈냐",
     images: ["/images/tokyo-disney.png", "/images/tokyo-disney2.png"],
@@ -106,7 +106,7 @@ export const mockTravelLogs: TravelLog[] = [
   {
     id: "3",
     travelId: "2",
-    date: new Date("2024-05-01"),
+    date: "2024-05-01",
     content: "제주도 도착! 제주도는 언제나 설레고 즐거워",
     images: ["/images/jeju-airport.jpeg"],
     location: "제주국제공항",
@@ -116,7 +116,7 @@ export const mockTravelLogs: TravelLog[] = [
   {
     id: "4",
     travelId: "2",
-    date: new Date("2024-05-02"),
+    date: "2024-05-02",
     content: "수학여행 이후 오는 성산일출봉은 느낌이 달랐다 멋져",
     images: ["/images/jeju-sungsan.jpg"],
     location: "성산일출봉",
@@ -126,7 +126,7 @@ export const mockTravelLogs: TravelLog[] = [
   {
     id: "5",
     travelId: "3",
-    date: new Date("2024-07-20"),
+    date: "2024-07-20",
     content:
       "오사카 도착! 도착하자마자 숙소가 있는 도톤보리로 왔는데 여긴 언제나 북적거린다..! 그리고 여기서 먹는 다코야키는 왜 맛있지? ㅎㅎ",
     images: ["/images/osaka-dotonbori.jpg", "/images/osaka-takoyaki.jpg"],
@@ -137,7 +137,7 @@ export const mockTravelLogs: TravelLog[] = [
   {
     id: "6",
     travelId: "3",
-    date: new Date("2024-07-21"),
+    date: "2024-07-21",
     content: "유니버설 스튜디오에서 시간 가는줄모르고 구경했다 .. ",
     images: ["/images/osaka-usj.jpg"],
     location: "유니버설 스튜디오 재팬",

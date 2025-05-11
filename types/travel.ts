@@ -20,7 +20,7 @@ export type Travel = {
 export type TravelLog = {
   id: string;
   travelId: string;
-  date: Date;
+  date: string;
   content: string;
   images: string[];
   location: string;

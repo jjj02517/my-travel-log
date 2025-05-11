@@ -32,7 +32,12 @@ export default function TravelLogCreateModal({
   // initialData나 open 상태가 변경될 때마다 폼 데이터 업데이트
   useEffect(() => {
     if (open && initialData) {
-      setDate(initialData.date);
+      // date가 Date면 string으로 변환
+      const dateString =
+        typeof initialData.date === "string"
+          ? initialData.date
+          : initialData.date.toISOString().split("T")[0];
+      setDate(dateString);
       setContent(initialData.content);
       setLocation(initialData.location);
       setWeather(initialData.weather);
@@ -92,7 +97,7 @@ export default function TravelLogCreateModal({
     onCreate({
       id: initialData?.id || String(Date.now()),
       travelId,
-      date,
+      date: date as unknown as string,
       content: content.trim(),
       images: images,
       location: location.trim(),

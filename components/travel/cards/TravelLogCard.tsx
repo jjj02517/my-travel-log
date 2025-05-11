@@ -12,21 +12,19 @@ type Props = {
 export default function TravelLogCard({ log, onEdit, onDelete }: Props) {
   const [imgError, setImgError] = useState(false);
 
-  // 날짜 포맷팅 함수
-  const formatDate = (dateString: string) => {
+  // 날짜 포맷팅 함수 (카드용)
+  const formatCardDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString("ko-KR", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    return `${date.getFullYear()}년 ${
+      date.getMonth() + 1
+    }월 ${date.getDate()}일`;
   };
 
   return (
     <div className="border p-4 rounded-md bg-white w-full">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4 text-sm text-gray-500">
-          <h4 className="">{formatDate(log.date as string)}</h4>
+          <h4 className="">{formatCardDate(log.date)}</h4>
           {log.location && <span className="text-sm">📍 {log.location}</span>}
         </div>
 
@@ -35,9 +33,7 @@ export default function TravelLogCard({ log, onEdit, onDelete }: Props) {
             onClick={() =>
               onEdit({
                 ...log,
-                date: (log.date as Date).toISOString
-                  ? (log.date as Date).toISOString()
-                  : (log.date as string),
+                date: log.date,
               })
             }
             className="p-1 rounded hover:bg-gray-100"
