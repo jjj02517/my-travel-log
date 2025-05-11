@@ -241,6 +241,7 @@ export default function AddTravelModal({
                   className="mt-2 rounded w-full h-40 object-cover"
                   width={400}
                   height={160}
+                  priority
                 />
               )}
             </div>

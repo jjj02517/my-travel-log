@@ -36,7 +36,7 @@ export default function TravelLogCreateModal({
       const dateString =
         typeof initialData.date === "string"
           ? initialData.date
-          : initialData.date.toISOString().split("T")[0];
+          : (initialData.date as Date).toISOString().split("T")[0];
       setDate(dateString);
       setContent(initialData.content);
       setLocation(initialData.location);
@@ -211,6 +211,7 @@ export default function TravelLogCreateModal({
                         width={100}
                         height={100}
                         className="w-full h-24 object-cover rounded"
+                        priority
                       />
                       <button
                         type="button"

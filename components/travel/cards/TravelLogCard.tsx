@@ -67,10 +67,11 @@ export default function TravelLogCard({ log, onEdit, onDelete }: Props) {
               key={index}
               src={image}
               alt={`여행 사진 ${index + 1}`}
-              className="w-full h-32 object-cover rounded"
+              className="w-full max-h-32 object-cover rounded"
               width={128}
-              height={128}
+              height={32}
               onError={() => setImgError(true)}
+              priority
             />
           ))}
         </div>

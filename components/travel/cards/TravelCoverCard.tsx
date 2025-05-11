@@ -34,6 +34,7 @@ export default function TravelCoverCard({
           width={208}
           height={117}
           onError={() => setImgError(true)}
+          priority
         />
       ) : (
         <div className="w-full h-52 flex items-center justify-center bg-gray-100 text-gray-400 text-sm">
