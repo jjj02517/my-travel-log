@@ -14,6 +14,15 @@ export default function TravelCoverCard({
 }: Props) {
   const [imgError, setImgError] = useState(false);
 
+  const formatDate = (date: Date | string) => {
+    const dateObj = date instanceof Date ? date : new Date(date);
+    return dateObj.toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   return (
     <div className="rounded-lg overflow-hidden shadow hover:shadow-md transition bg-white">
       {coverImage && !imgError ? (
@@ -32,7 +41,7 @@ export default function TravelCoverCard({
         <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
         <p className="text-sm text-gray-500">📍 {location}</p>
         <p className="text-sm text-gray-500">
-          📅 {startDate} ~ {endDate}
+          📅 {formatDate(startDate)} ~ {formatDate(endDate)}
         </p>
       </div>
     </div>

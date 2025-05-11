@@ -10,41 +10,57 @@ type Props = {
   initialData?: Travel | null;
 };
 
+type FormData = {
+  title: string;
+  description: string;
+  startDate: Date;
+  endDate: Date;
+  location: string;
+  coverImage: string;
+};
+
 export default function AddTravelModal({
   open,
   onClose,
   onAdd,
   initialData,
 }: Props) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     title: "",
     description: "",
-    startDate: "",
-    endDate: "",
+    startDate: new Date(),
+    endDate: new Date(),
     location: "",
     coverImage: "",
   });
   const [coverFile, setCoverFile] = useState<File | null>(null);
   const [dateError, setDateError] = useState("");
 
-  // initialData가 변경될 때마다 폼 데이터 업데이트
   useEffect(() => {
     if (initialData) {
+      const startDate =
+        initialData.startDate instanceof Date
+          ? initialData.startDate
+          : new Date(initialData.startDate);
+      const endDate =
+        initialData.endDate instanceof Date
+          ? initialData.endDate
+          : new Date(initialData.endDate);
+
       setFormData({
         title: initialData.title,
         description: initialData.description,
-        startDate: initialData.startDate,
-        endDate: initialData.endDate,
+        startDate,
+        endDate,
         location: initialData.location,
         coverImage: initialData.coverImage || "",
       });
     } else if (!open) {
-      // 모달이 닫힐 때 초기화
       setFormData({
         title: "",
         description: "",
-        startDate: "",
-        endDate: "",
+        startDate: new Date(),
+        endDate: new Date(),
         location: "",
         coverImage: "",
       });
@@ -58,18 +74,30 @@ export default function AddTravelModal({
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-    // 날짜 유효성 검사
-    if (name === "startDate" || name === "endDate") {
-      const start = name === "startDate" ? value : formData.startDate;
-      const end = name === "endDate" ? value : formData.endDate;
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    if (!value) return;
 
-      if (start && end && new Date(start) > new Date(end)) {
+    const newDate = new Date(value);
+    if (isNaN(newDate.getTime())) return;
+
+    setFormData((prev) => {
+      const updated = {
+        ...prev,
+        [name]: newDate,
+      };
+
+      // 날짜 유효성 검사
+      if (updated.startDate > updated.endDate) {
         setDateError("종료일은 시작일보다 이후여야 합니다.");
       } else {
         setDateError("");
       }
-    }
+
+      return updated;
+    });
   };
 
   const handleCoverImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,9 +119,11 @@ export default function AddTravelModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData.title || !formData.startDate || !formData.endDate) {
+      return;
+    }
 
-    // 날짜 유효성 검사
-    if (new Date(formData.startDate) > new Date(formData.endDate)) {
+    if (formData.startDate > formData.endDate) {
       setDateError("종료일은 시작일보다 이후여야 합니다.");
       return;
     }
@@ -101,6 +131,9 @@ export default function AddTravelModal({
     onAdd({
       id: initialData?.id || Math.random().toString(36).slice(2),
       ...formData,
+      tags: initialData?.tags || [],
+      createdAt: initialData?.createdAt || new Date(),
+      updatedAt: new Date(),
     });
     handleClose();
   };
@@ -110,6 +143,10 @@ export default function AddTravelModal({
     setFormData((prev) => ({ ...prev, coverImage: "" }));
     setDateError("");
     onClose();
+  };
+
+  const formatDateForInput = (date: Date) => {
+    return date.toISOString().split("T")[0];
   };
 
   return (
@@ -161,8 +198,8 @@ export default function AddTravelModal({
                 <input
                   type="date"
                   name="startDate"
-                  value={formData.startDate}
-                  onChange={handleChange}
+                  value={formatDateForInput(formData.startDate)}
+                  onChange={handleDateChange}
                   className="w-full p-2 border rounded text-dark"
                   required
                 />
@@ -171,8 +208,8 @@ export default function AddTravelModal({
                 <input
                   type="date"
                   name="endDate"
-                  value={formData.endDate}
-                  onChange={handleChange}
+                  value={formatDateForInput(formData.endDate)}
+                  onChange={handleDateChange}
                   className="w-full p-2 border rounded text-dark"
                   required
                 />

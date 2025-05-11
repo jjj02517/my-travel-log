@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { TravelDetail } from "@/types/travel";
+import type { TravelDetail, Tag } from "@/types/travel";
 import TravelLogCard from "@/components/travel/cards/TravelLogCard";
 import TravelLogCreateModal from "@/components/travel/modals/TravelLogCreateModal";
 import TravelDetailInfoCard from "@/components/travel/cards/TravelDetailInfoCard";
@@ -17,7 +17,7 @@ export default function TravelLogList({
   onTravelUpdate,
   onTravelDelete,
 }: Props) {
-  const [tags, setTags] = useState<string[]>(travel.tags || []);
+  const [tags, setTags] = useState<string[]>(travel.tags.map((tag) => tag.id));
   const [isLogModalOpen, setIsLogModalOpen] = useState(false);
   const [logList, setLogList] = useState<TravelDetail["logs"]>(logs);
   const [editingLog, setEditingLog] = useState<TravelDetail["logs"][0] | null>(

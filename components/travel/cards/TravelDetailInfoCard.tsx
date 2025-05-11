@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { TravelDetail } from "@/types/travel";
+import type { TravelDetail, Tag } from "@/types/travel";
 import { mockTags } from "@/msw/data/mockData";
 import TagCreateModal from "@/components/travel/modals/TagCreateModal";
 import AddTravelModal from "@/components/travel/modals/AddTravelModal";
@@ -23,6 +23,15 @@ export default function TravelDetailInfo({
   const [isTagModalOpen, setIsTagModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
+  const formatDate = (date: Date | string) => {
+    const dateObj = date instanceof Date ? date : new Date(date);
+    return dateObj.toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   // 사용 가능한 태그 = mockTags에서 이미 추가된 태그 제외
   const availableTags = mockTags.filter((tag) => !tags.includes(tag.id));
 
@@ -39,7 +48,7 @@ export default function TravelDetailInfo({
   };
 
   // 태그 생성
-  const handleCreateTag = (newTag) => {
+  const handleCreateTag = (newTag: Tag) => {
     mockTags.push(newTag);
     setIsTagModalOpen(false);
   };
@@ -86,7 +95,7 @@ export default function TravelDetailInfo({
         <div className="flex gap-4 text-sm text-gray-500">
           <p>📍 {travel.location}</p>
           <p>
-            📅 {travel.startDate} ~ {travel.endDate}
+            📅 {formatDate(travel.startDate)} ~ {formatDate(travel.endDate)}
           </p>
         </div>
 

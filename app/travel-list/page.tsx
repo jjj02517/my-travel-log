@@ -8,6 +8,7 @@ import { fetchTravelDetail } from "@/api/travel/detail";
 import type { TravelListItem, TravelDetail } from "@/types/travel";
 import { useState } from "react";
 import AddTravelModal from "@/components/travel/modals/AddTravelModal";
+import { addMockTravel } from "@/msw/data/mockData";
 
 export default function TravelListPage() {
   const queryClient = useQueryClient();
@@ -29,10 +30,16 @@ export default function TravelListPage() {
 
   // 여행 추가 핸들러
   const handleAddTravel = (newTravel: TravelListItem) => {
-    // 캐시된 여행 목록 업데이트
+    // Mock 데이터에 새로운 여행 추가
+    const addedTravel = addMockTravel({
+      ...newTravel,
+      tags: [],
+    });
+
+    // 캐시된 여행 목록 업데이트 (맨 뒤에 추가)
     queryClient.setQueryData<TravelListItem[]>(["travelList"], (old = []) => [
-      newTravel,
       ...old,
+      addedTravel,
     ]);
     setIsModalOpen(false);
   };

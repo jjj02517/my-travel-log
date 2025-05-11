@@ -1,37 +1,46 @@
 export type Tag = {
-  id: string
-  name: string
-  color: string
-}
+  id: string;
+  name: string;
+  color: string;
+};
 
 export type Travel = {
-  id: string
-  title: string
-  description: string
-  startDate: Date
-  endDate: Date
-  location: string
-  coverImage: string
-  tags: Tag[]
-  createdAt: Date
-  updatedAt: Date
-}
+  id: string;
+  title: string;
+  description: string;
+  startDate: Date;
+  endDate: Date;
+  location: string;
+  coverImage: string;
+  tags: Tag[];
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 export type TravelLog = {
-  id: string
-  travelId: string
-  date: Date
-  content: string
-  images: string[]
-  location: string
-  weather: string
-  mood: string
-}
+  id: string;
+  travelId: string;
+  date: Date;
+  content: string;
+  images: string[];
+  location: string;
+  weather: string;
+  mood: string;
+};
 
 // For backward compatibility
-export type TravelListItem = Pick<Travel, 'id' | 'title' | 'coverImage' | 'startDate' | 'endDate'>
+export type TravelListItem = Pick<
+  Travel,
+  | "id"
+  | "title"
+  | "coverImage"
+  | "startDate"
+  | "endDate"
+  | "location"
+  | "description"
+>;
 
 // Travel detail with logs
 export type TravelDetail = Travel & {
-  logs: TravelLog[]
-}
+  logs: TravelLog[];
+};
