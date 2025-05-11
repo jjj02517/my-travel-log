@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { TravelDetail, Tag } from "@/types/travel";
+import type { TravelDetail } from "@/types/travel";
 import TravelLogCard from "@/components/travel/cards/TravelLogCard";
 import TravelLogCreateModal from "@/components/travel/modals/TravelLogCreateModal";
 import TravelDetailInfoCard from "@/components/travel/cards/TravelDetailInfoCard";

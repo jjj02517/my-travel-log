@@ -1,6 +1,4 @@
 import { useState } from "react";
-import type { Travel } from "@/types/travel";
-import { mockTags } from "@/msw/data/mockData";
 import type { TravelListItem } from "@/types/travel";
 import Image from "next/image";
 

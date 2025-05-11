@@ -34,7 +34,7 @@ export default function AddTravelModal({
     location: "",
     coverImage: "",
   });
-  const [coverFile, setCoverFile] = useState<File | null>(null);
+  const [, setCoverFile] = useState<File | null>(null);
   const [dateError, setDateError] = useState("");
 
   useEffect(() => {
