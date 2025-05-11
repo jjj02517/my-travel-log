@@ -1,5 +1,5 @@
-import type { NextConfig } from 'next'
-import path from 'path'
+import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   webpack: (config) => {
@@ -7,12 +7,16 @@ const nextConfig: NextConfig = {
       ...(config.resolve || {}),
       alias: {
         ...(config.resolve?.alias || {}),
-        '@': path.resolve(__dirname),
+        "@": path.resolve(__dirname),
       },
-    }
+    };
 
-    return config
+    return config;
   },
-}
+  images: {
+    unoptimized: true,
+  },
+  transpilePackages: ["msw"],
+};
 
-export default nextConfig
+export default nextConfig;

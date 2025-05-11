@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { TravelDetail } from "@/types/travel";
+import type { TravelDetail, TravelLog } from "@/types/travel";
 import TravelLogCard from "@/components/travel/cards/TravelLogCard";
 import TravelLogCreateModal from "@/components/travel/modals/TravelLogCreateModal";
 import TravelDetailInfoCard from "@/components/travel/cards/TravelDetailInfoCard";
@@ -30,7 +30,7 @@ export default function TravelLogList({
     setIsLogModalOpen(true);
   };
 
-  const handleCreateLog = (newLog: any) => {
+  const handleCreateLog = (newLog: TravelLog) => {
     if (editingLog) {
       // 수정 모드
       setLogList((prev) =>

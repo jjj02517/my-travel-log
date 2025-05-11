@@ -5,7 +5,7 @@ import Link from "next/link";
 import TravelCoverCard from "@/components/travel/cards/TravelCoverCard";
 import { fetchTravelList } from "@/api/travel/list";
 import { fetchTravelDetail } from "@/api/travel/detail";
-import type { TravelListItem, TravelDetail } from "@/types/travel";
+import type { TravelListItem } from "@/types/travel";
 import { useState } from "react";
 import AddTravelModal from "@/components/travel/modals/AddTravelModal";
 import { addMockTravel } from "@/msw/data/mockData";

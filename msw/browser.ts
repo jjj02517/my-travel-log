@@ -1,4 +1,5 @@
-// msw/browser.ts
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import { setupWorker } from "msw/browser";
 import { handlers } from "./handlers";
 
@@ -12,7 +13,7 @@ if (typeof window !== "undefined") {
     .start({
       onUnhandledRequest: "bypass", // 처리되지 않은 요청은 무시
     })
-    .catch((error) => {
+    .catch((error: Error) => {
       console.error("MSW failed to start:", error);
     });
 }
