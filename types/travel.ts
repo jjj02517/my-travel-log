@@ -26,7 +26,6 @@ export type TravelLog = {
   mood: string;
 };
 
-// For backward compatibility
 export type TravelListItem = Pick<
   Travel,
   | "id"
@@ -38,7 +37,6 @@ export type TravelListItem = Pick<
   | "description"
 >;
 
-// Travel detail with logs
 export type TravelDetail = Travel & {
   logs: TravelLog[];
 };

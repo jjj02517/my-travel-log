@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✈️ Travel Log - 여행 기록 웹앱
 
-## Getting Started
+여행의 추억을 기록하고, 여행별 상세 정보와 일지, 태그, 이미지를 관리할 수 있는 React 기반의 여행 로그 웹입니다.  
+MSW(Mock Service Worker)로 API를 모킹하여 개발/배포 환경 모두에서 일관된 동작을 보장합니다.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🗂️ 프로젝트 구조
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **`/app`**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+  - Next.js 페이지 라우팅 디렉토리
+  - `index.tsx` → 메인(list)
+  - `travel/[id].tsx` → 상세(detail)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **`/components`**
 
-## Learn More
+  - 재사용 가능한 UI 컴포넌트 폴더
+  - `travel/cards` : 카드 형태의 컴포넌트
+  - `travel/lists` : 리스트 형태의 컴포넌트
+  - `travel/modals`: 모달 형태의 컴포넌트
 
-To learn more about Next.js, take a look at the following resources:
+- **`/msw`**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  - 개발용 Mock 서버 설정 및 핸들러
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **`/providers`**
 
-## Deploy on Vercel
+  - 전역 설정용 Provider (여기서는 MSW)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **`/types`**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+  - TypeScript 타입 선언 파일
+
+- **`next.config.js`**
+  - Next.js 및 MSW 연동을 위한 설정 파일
+
+---
+
+## 🖥️ 주요 페이지 및 기능
+
+1. **여행 목록 페이지 (`/`)**
+
+   - 등록된 여행들의 리스트를 날짜순(오름차순)으로 보여줍니다.
+   - 각 여행 카드는 타이틀, 위치, 기간, 대표 태그 등 최소 정보만 표시합니다.
+   - 여행 추가 버튼을 통해 새 여행을 등록할 수 있습니다.
+
+2. **여행 상세 페이지 (`/travel/[id]`)**
+
+   - 선택한 여행의 상세 정보(타이틀, 위치, 기간, 설명, 태그 등)를 `TravelDetailInfoCard`로 표시합니다.
+   - 여행 정보 수정/삭제 기능 제공(모달/확인창 포함).
+   - 여행에 등록된 여행 로그(일정) 리스트를 날짜순으로 보여줍니다.
+   - **여행 로그 관리**
+     - 추가/수정/삭제
+     - 모달 입력 및 확인창 처리
+   - **여행 태그 관리**
+     - 태그 추가/삭제/생성 (모달)
+     - 최대 7개 태그 사용 가능
+   - **이미지 첨부**
+     - 여행 및 여행 로그 등록/수정 시 최대 6장 첨부
+     - 미리보기 및 개별 삭제 지원
+   - **날짜 입력 및 유효성 검사**
+     - 종료일이 시작일보다 빠르면 저장 불가 및 에러 메시지 표시
+
+3. **공통/기타 기능**
+   - **MSW(Mock Service Worker)**
+     - 개발/배포 환경 모두에서 API 모킹
+     - `MSWProvider` 및 `next.config.js` 설정 포함
+   - **React Query**
+     - 캐시 및 UI 동기화
+     - 여행 추가/수정/삭제 시 캐시 무효화 및 업데이트
+   - **날짜/데이터 포맷팅**
+     - 일관된 날짜 포맷 함수 사용
+   - **오류 대응**
+     - 타입스크립트 정의 및 변환 로직 개선으로 안정성 확보
+
+---
+
+## 🛠️ 기술 스택
+
+- React / Next.js
+- TypeScript
+- React Query (데이터 캐싱 및 동기화)
+- MSW (Mock Service Worker)
+- Tailwind CSS (스타일링)
+- ESLint, Prettier 등
+
+---
+
+## 🚀 실행 방법
+
+1. 의존성 설치
+   ```bash
+   pnpm install
+   ```
+2. 개발 서버 실행
+   ```bash
+   pnpm dev
+   ```
+3. 운영 서버 실행
+   ```bash
+   npm build
+   npm start
+   ```
+
+## 📌 기타 참고사항
+
+모든 데이터(여행/로그/태그/이미지 등)는 MSW로 모킹된 API를 통해 관리됩니다.
+
+여행 ID는 기존 여행 개수 + 1로 자동 부여됩니다.
+
+발생하는 타입 에러, 런타임 에러, 빌드 에러는 타입 정의 및 변환 로직 수정으로 해결해 왔습니다.
+
+별도의 DB세팅이 안되어있어 추가/수정/삭제한 내용이 저장되지 않습니다.
