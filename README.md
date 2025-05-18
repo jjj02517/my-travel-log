@@ -99,8 +99,8 @@ MSW(Mock Service Worker)로 API를 모킹하여 개발/배포 환경 모두에�
    ```
 3. 운영 서버 실행
    ```bash
-   npm build
-   npm start
+   pnpm build
+   pnpm start
    ```
 
 ## 📌 기타 참고사항
